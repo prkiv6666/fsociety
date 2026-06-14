@@ -21,12 +21,12 @@ export default function CountUp({
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [display, setDisplay] = useState<string>(value);
 
-  // Parse "500+" -> { prefix:"", num:500, suffix:"+" }.
-  // The suffix must contain NO digits, so values like "24/7" don't get
-  // animated into nonsense (they render as-is).
-  const match = value.match(/^(\D*)(\d[\d,]*(?:\.\d+)?)(\D*)$/);
-
   useEffect(() => {
+    // Parse "500+" -> { prefix:"", num:500, suffix:"+" }.
+    // The suffix must contain NO digits, so values like "24/7" don't get
+    // animated into nonsense (they render as-is). Parsed inside the effect
+    // so the regex result isn't a new reference in the dependency array.
+    const match = value.match(/^(\D*)(\d[\d,]*(?:\.\d+)?)(\D*)$/);
     if (!match) {
       setDisplay(value);
       return;
@@ -59,7 +59,7 @@ export default function CountUp({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration, match]);
+  }, [inView, value, duration]);
 
   return (
     <span ref={ref} className={className}>
