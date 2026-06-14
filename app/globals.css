@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon: #ff1e3c;
+  --neon-deep: #c10026;
+}
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-base-950 font-body text-zinc-300 antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(255, 30, 60, 0.3);
+    color: #fff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050506;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c10026, #5a0014);
+    border-radius: 999px;
+    border: 2px solid #050506;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff1e3c, #c10026);
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-neon;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon/60;
+  }
+  .btn-primary {
+    @apply bg-neon text-black shadow-neon hover:-translate-y-0.5 hover:bg-neon-bright hover:shadow-neon-lg;
+  }
+  .btn-ghost {
+    @apply border border-white/15 bg-white/[0.04] text-zinc-100 backdrop-blur hover:-translate-y-0.5 hover:border-neon/60 hover:text-white hover:shadow-neon-sm;
+  }
+
+  /* Glass / cyber card */
+  .card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl transition-all duration-300;
+  }
+  .card::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/50 to-transparent opacity-0 transition-opacity duration-300;
+  }
+  .card:hover {
+    @apply -translate-y-1 border-neon/50 shadow-neon;
+  }
+  .card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Region / status badge base */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider;
+  }
+
+  /* Futuristic horizontal divider */
+  .divider-x {
+    @apply relative mx-auto h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-neon/40 to-transparent;
+  }
+  .divider-x::after {
+    content: "";
+    @apply absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-neon shadow-neon;
+  }
+
+  /* Gothic logo frame (matches the FSOCIETY artwork) */
+  .logo-frame {
+    @apply relative bg-base-900/40 backdrop-blur-sm;
+    border: 1.5px solid rgba(255, 40, 70, 0.7);
+    box-shadow: 0 0 34px rgba(255, 30, 60, 0.32),
+      inset 0 0 22px rgba(255, 30, 60, 0.12);
+    clip-path: polygon(
+      4% 0,
+      96% 0,
+      100% 22%,
+      100% 78%,
+      96% 100%,
+      4% 100%,
+      0 78%,
+      0 22%
+    );
+  }
+}
+
+@layer utilities {
+  /* Futuristic grid */
+  .grid-bg {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 30, 60, 0.07) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 30, 60, 0.07) 1px, transparent 1px);
+    background-size: 58px 58px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 35%,
+      #000 35%,
+      transparent 78%
+    );
+    mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 35%,
+      #000 35%,
+      transparent 78%
+    );
+  }
+
+  /* Film grain / noise */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+  }
+
+  /* Metallic silver gothic text (matches logo lettering) */
+  .metallic {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0f4 16%,
+      #b9bcc6 44%,
+      #888c98 56%,
+      #cfd3dc 74%,
+      #ffffff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+    filter: drop-shadow(0 0 16px rgba(255, 30, 60, 0.55))
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7));
+  }
+
+  .text-glow {
+    text-shadow: 0 0 24px rgba(255, 30, 60, 0.55);
+  }
+
+  .bg-radial-neon {
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 30, 60, 0.22),
+      transparent 70%
+    );
+  }
+}
