@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Send, ListTree, ShieldCheck } from "lucide-react";
 import { BrandLockup } from "./Logo";
+import DecryptText from "./DecryptText";
 import { TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 const container = {
@@ -46,7 +47,12 @@ export default function Hero() {
           variants={item}
           className="mt-8 font-display text-2xl font-extrabold uppercase tracking-[0.18em] text-white sm:text-3xl md:text-4xl"
         >
-          FSOCIETY <span className="text-neon text-glow">Services</span>
+          <DecryptText text="FSOCIETY" />{" "}
+          <DecryptText
+            text="Services"
+            className="text-neon text-glow"
+            delay={140}
+          />
         </motion.h1>
 
         <motion.p

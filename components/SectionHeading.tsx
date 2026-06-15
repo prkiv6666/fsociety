@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import DecryptText from "./DecryptText";
 
 export function SectionHeading({
   eyebrow,
@@ -18,7 +19,9 @@ export function SectionHeading({
         </span>
       </Reveal>
       <Reveal delay={0.08}>
-        <h2 className="section-title mt-4">{title}</h2>
+        <h2 className="section-title mt-4">
+          <DecryptText text={title} />
+        </h2>
       </Reveal>
       {subtitle && (
         <Reveal delay={0.16}>
