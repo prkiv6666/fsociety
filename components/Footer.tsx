@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { Send } from "lucide-react";
-import { Wordmark } from "./Logo";
 import { navLinks, TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 export default function Footer() {
@@ -8,8 +8,14 @@ export default function Footer() {
       <div className="container-x py-12">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
           <div className="text-center md:text-left">
-            <Wordmark className="text-3xl" />
-            <p className="mt-3 max-w-xs font-mono text-xs uppercase tracking-[0.3em] text-neon-soft">
+            <Image
+              src="/logo.png"
+              alt="FSOCIETY"
+              width={612}
+              height={408}
+              className="mx-auto w-48 md:mx-0 drop-shadow-[0_0_18px_rgba(255,30,60,0.45)]"
+            />
+            <p className="-mt-2 max-w-xs font-mono text-xs uppercase tracking-[0.3em] text-neon-soft">
               Private • Secure • Fast
             </p>
           </div>
