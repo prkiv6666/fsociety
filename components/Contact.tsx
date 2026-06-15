@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Send, ShieldAlert } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { Wordmark } from "./Logo";
 import { TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 export default function Contact() {
@@ -16,7 +16,13 @@ export default function Contact() {
             <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-radial-neon blur-3xl" />
 
             <div className="relative flex flex-col items-center">
-              <Wordmark className="text-3xl sm:text-4xl" />
+              <Image
+                src="/logo.png"
+                alt="FSOCIETY"
+                width={612}
+                height={408}
+                className="w-56 drop-shadow-[0_0_22px_rgba(255,30,60,0.5)] sm:w-72"
+              />
 
               <h2 className="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white sm:text-5xl">
                 Join <span className="text-neon text-glow">FSOCIETY</span> Today
