@@ -5,6 +5,7 @@ import { Send, ListTree, ShieldCheck } from "lucide-react";
 import { BrandLockup } from "./Logo";
 import DecryptText from "./DecryptText";
 import Magnetic from "./Magnetic";
+import { haptic } from "@/lib/haptics";
 import { TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 const container = {
@@ -80,6 +81,7 @@ export default function Hero() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => haptic()}
               className="btn btn-primary w-full sm:w-auto"
             >
               <Send className="h-4 w-4" />
@@ -87,7 +89,11 @@ export default function Hero() {
             </a>
           </Magnetic>
           <Magnetic className="w-full sm:w-auto">
-            <a href="#stores" className="btn btn-ghost w-full sm:w-auto">
+            <a
+              href="#stores"
+              onClick={() => haptic()}
+              className="btn btn-ghost w-full sm:w-auto"
+            >
               <ListTree className="h-4 w-4" />
               View Store List
             </a>

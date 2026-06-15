@@ -57,6 +57,7 @@ export default function TiltCard({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={reset}
+      whileTap={{ scale: 0.98 }}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       className={`group relative ${className}`}
     >

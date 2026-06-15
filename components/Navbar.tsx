@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Send } from "lucide-react";
 import { navLinks, TELEGRAM_URL } from "@/lib/data";
+import { haptic } from "@/lib/haptics";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -69,7 +70,10 @@ export default function Navbar() {
           <button
             type="button"
             aria-label="Toggle menu"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              haptic();
+              setOpen((v) => !v);
+            }}
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white md:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -104,7 +108,10 @@ export default function Navbar() {
                   href={TELEGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    haptic();
+                    setOpen(false);
+                  }}
                   className="btn btn-primary w-full"
                 >
                   <Send className="h-4 w-4" />

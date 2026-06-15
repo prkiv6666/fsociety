@@ -14,6 +14,7 @@ import IntroScreen from "@/components/IntroScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
 import StoreTicker from "@/components/StoreTicker";
+import MobileContactBar from "@/components/MobileContactBar";
 
 function Divider() {
   return (
@@ -50,6 +51,7 @@ export default function Home() {
       <Footer />
       <SiteTour />
       <BackToTop />
+      <MobileContactBar />
     </>
   );
 }

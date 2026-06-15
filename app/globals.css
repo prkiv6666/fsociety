@@ -22,6 +22,14 @@
     overflow-x: hidden;
   }
 
+  /* Leave room for the mobile sticky contact bar so the footer isn't
+     hidden behind it (bar is hidden on md+). */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+    }
+  }
+
   ::selection {
     background: rgba(255, 30, 60, 0.3);
     color: #fff;

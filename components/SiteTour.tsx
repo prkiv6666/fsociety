@@ -145,7 +145,7 @@ export default function SiteTour() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
             onClick={start}
-            className="fixed bottom-5 right-5 z-[60] inline-flex items-center gap-2 rounded-full border border-neon/40 bg-base-950/80 px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-neon shadow-neon-sm backdrop-blur transition-colors hover:border-neon hover:bg-neon/10"
+            className="fixed bottom-24 right-5 z-[60] inline-flex items-center gap-2 rounded-full border border-neon/40 bg-base-950/80 px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-neon shadow-neon-sm backdrop-blur transition-colors hover:border-neon hover:bg-neon/10 md:bottom-5"
             aria-label="Take the tour"
           >
             <Play className="h-4 w-4 fill-neon" />
@@ -162,7 +162,7 @@ export default function SiteTour() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-0 bottom-5 z-[60] flex justify-center px-4"
+            className="fixed inset-x-0 bottom-24 z-[60] flex justify-center px-4 md:bottom-5"
           >
             <div className="w-full max-w-md overflow-hidden rounded-2xl border border-neon/30 bg-base-950/90 shadow-neon-sm backdrop-blur-xl">
               <div className="flex items-start gap-3 p-4">

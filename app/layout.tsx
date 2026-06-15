@@ -52,6 +52,15 @@ export const metadata: Metadata = {
       "A private digital service channel focused on selected store access, clear communication, trusted updates, and fast support.",
     type: "website",
   },
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FSOCIETY",
+  },
 };
 
 export const viewport: Viewport = {

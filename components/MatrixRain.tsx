@@ -22,17 +22,24 @@ export default function MatrixRain() {
     const chars = "01アイウエオカキクケコサシスセソ$#%&*+ABCDEF</>".split("");
     const fontSize = 16;
     let columns = 0;
+    let colStep = fontSize;
     let drops: number[] = [];
     let dpr = 1;
+    let interval = 55; // ms between frames — slow, ambient
 
     const setup = () => {
+      // On phones: fewer columns + slower frames to save battery/CPU.
+      const mobile = window.innerWidth < 640;
+      colStep = mobile ? fontSize * 1.7 : fontSize;
+      interval = mobile ? 95 : 55;
+
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = window.innerWidth + "px";
       canvas.style.height = window.innerHeight + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      columns = Math.floor(window.innerWidth / fontSize);
+      columns = Math.floor(window.innerWidth / colStep);
       drops = Array.from({ length: columns }, () =>
         Math.floor((Math.random() * window.innerHeight) / fontSize),
       );
@@ -41,7 +48,6 @@ export default function MatrixRain() {
 
     let raf = 0;
     let last = 0;
-    const interval = 55; // ms between frames — slow, ambient
 
     const draw = (t: number) => {
       raf = requestAnimationFrame(draw);
@@ -55,7 +61,7 @@ export default function MatrixRain() {
       ctx.font = `${fontSize}px monospace`;
       for (let i = 0; i < drops.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
-        const x = i * fontSize;
+        const x = i * colStep;
         const y = drops[i] * fontSize;
 
         // bright leading char, dimmer trail
