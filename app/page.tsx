@@ -13,6 +13,7 @@ import SiteTour from "@/components/SiteTour";
 import IntroScreen from "@/components/IntroScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import StoreTicker from "@/components/StoreTicker";
 
 function Divider() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
+        <StoreTicker />
         <Divider />
         <Stores />
         <Divider />

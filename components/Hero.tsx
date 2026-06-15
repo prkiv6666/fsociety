@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Send, ListTree, ShieldCheck } from "lucide-react";
 import { BrandLockup } from "./Logo";
 import DecryptText from "./DecryptText";
+import Magnetic from "./Magnetic";
 import { TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 const container = {
@@ -74,19 +75,23 @@ export default function Hero() {
           variants={item}
           className="mt-9 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"
         >
-          <a
-            href={TELEGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary w-full sm:w-auto"
-          >
-            <Send className="h-4 w-4" />
-            Contact on Telegram
-          </a>
-          <a href="#stores" className="btn btn-ghost w-full sm:w-auto">
-            <ListTree className="h-4 w-4" />
-            View Store List
-          </a>
+          <Magnetic className="w-full sm:w-auto">
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full sm:w-auto"
+            >
+              <Send className="h-4 w-4" />
+              Contact on Telegram
+            </a>
+          </Magnetic>
+          <Magnetic className="w-full sm:w-auto">
+            <a href="#stores" className="btn btn-ghost w-full sm:w-auto">
+              <ListTree className="h-4 w-4" />
+              View Store List
+            </a>
+          </Magnetic>
         </motion.div>
 
         <motion.a
