@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -11,15 +11,38 @@ export default function VouchCarousel() {
   const [direction, setDirection] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
-  if (vouchImages.length === 0) return null;
-
   const count = vouchImages.length;
   const src = (name: string) => `/vouches/${name}`;
 
-  const go = (dir: number) => {
-    setDirection(dir);
-    setIndex((i) => (i + dir + count) % count);
-  };
+  const go = useCallback(
+    (dir: number) => {
+      setDirection(dir);
+      setIndex((i) => (i + dir + count) % count);
+    },
+    [count],
+  );
+
+  // Keyboard control + background scroll lock while the lightbox is open.
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(false);
+      else if (e.key === "ArrowRight") go(1);
+      else if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightbox, go]);
+
+  if (count === 0) return null;
 
   return (
     <div className="mt-10 w-full max-w-xl">
@@ -111,14 +134,45 @@ export default function VouchCarousel() {
             <button
               type="button"
               aria-label="Close"
-              className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/5 text-white hover:border-neon/60 hover:text-neon"
+              onClick={() => setLightbox(false)}
+              className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/5 text-white hover:border-neon/60 hover:text-neon"
             >
               <X className="h-5 w-5" />
             </button>
+
+            {count > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    go(-1);
+                  }}
+                  className="absolute left-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur transition-colors hover:border-neon/60 hover:text-neon sm:left-6"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    go(1);
+                  }}
+                  className="absolute right-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur transition-colors hover:border-neon/60 hover:text-neon sm:right-6"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+
             <motion.div
-              initial={{ scale: 0.92 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.92 }}
+              key={index}
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
               className="relative h-[85vh] w-full max-w-3xl"
             >
@@ -130,6 +184,12 @@ export default function VouchCarousel() {
                 className="object-contain"
               />
             </motion.div>
+
+            {count > 1 && (
+              <div className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-xs text-zinc-300 backdrop-blur">
+                {index + 1} / {count}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
