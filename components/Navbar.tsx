@@ -36,7 +36,7 @@ export default function Navbar() {
             width={600}
             height={400}
             priority
-            className="h-24 w-auto sm:h-32"
+            className="h-24 w-auto sm:h-32 logo-glitch"
           />
         </a>
 

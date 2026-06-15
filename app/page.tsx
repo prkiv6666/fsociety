@@ -11,6 +11,8 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SiteTour from "@/components/SiteTour";
 import IntroScreen from "@/components/IntroScreen";
+import ScrollProgress from "@/components/ScrollProgress";
+import BackToTop from "@/components/BackToTop";
 
 function Divider() {
   return (
@@ -25,6 +27,7 @@ export default function Home() {
     <>
       <IntroScreen />
       <Background />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
@@ -44,6 +47,7 @@ export default function Home() {
       </main>
       <Footer />
       <SiteTour />
+      <BackToTop />
     </>
   );
 }

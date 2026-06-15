@@ -167,6 +167,47 @@
     text-shadow: 0 0 24px rgba(255, 30, 60, 0.55);
   }
 
+  /* Periodic "glitch" — mostly idle, then a brief slice/RGB-split burst.
+     steps(1) snaps between frames for a digital, non-smooth feel. */
+  @keyframes logo-glitch {
+    0%,
+    88%,
+    100% {
+      transform: translate(0, 0);
+      filter: none;
+      clip-path: none;
+    }
+    89% {
+      transform: translate(-2px, 1px);
+      clip-path: inset(18% 0 42% 0);
+      filter: drop-shadow(2px 0 rgba(255, 30, 60, 0.8))
+        drop-shadow(-2px 0 rgba(0, 180, 255, 0.55));
+    }
+    91% {
+      transform: translate(2px, -1px);
+      clip-path: inset(58% 0 12% 0);
+      filter: drop-shadow(-2px 0 rgba(255, 30, 60, 0.8));
+    }
+    93% {
+      transform: translate(-1px, 0);
+      clip-path: inset(8% 0 68% 0);
+      filter: drop-shadow(2px 0 rgba(0, 180, 255, 0.55));
+    }
+    95% {
+      transform: translate(1px, 1px);
+      clip-path: none;
+      filter: none;
+    }
+  }
+  .logo-glitch {
+    animation: logo-glitch 7s steps(1, end) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-glitch {
+      animation: none;
+    }
+  }
+
   .bg-radial-neon {
     background: radial-gradient(
       circle at center,
