@@ -5,6 +5,7 @@ import {
   Chakra_Petch,
   Share_Tech_Mono,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const gothic = Grenze_Gotisch({
@@ -79,7 +80,10 @@ export default function RootLayout({
       lang="en"
       className={`${gothic.variable} ${display.variable} ${body.variable} ${mono.variable}`}
     >
-      <body className="relative min-h-screen overflow-x-hidden">{children}</body>
+      <body className="relative min-h-screen overflow-x-hidden">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
