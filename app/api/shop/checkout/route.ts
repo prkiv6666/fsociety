@@ -2,22 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { getProduct } from "@/lib/shop";
 import { store, storeConfigured } from "@/lib/store";
-import { cryptoPay, cryptoPayConfigured } from "@/lib/cryptopay";
+import { createInvoice, nowPaymentsConfigured } from "@/lib/nowpayments";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const FIAT = process.env.CRYPTO_PAY_FIAT || "EUR";
-
-interface Invoice {
-  invoice_id: number;
-  bot_invoice_url?: string;
-  pay_url?: string;
-  mini_app_invoice_url?: string;
-}
-
 export async function POST(req: NextRequest) {
-  if (!cryptoPayConfigured() || !storeConfigured()) {
+  if (!nowPaymentsConfigured() || !storeConfigured()) {
     return NextResponse.json(
       { error: "Shop is not configured yet." },
       { status: 503 },
@@ -39,20 +30,17 @@ export async function POST(req: NextRequest) {
   const orderId = crypto.randomUUID();
   const origin = req.nextUrl.origin;
 
-  const inv = await cryptoPay<Invoice>("createInvoice", {
-    currency_type: "fiat",
-    fiat: FIAT,
-    amount: product.priceEur.toFixed(2),
-    description: `${product.name} — FSOCIETY`,
-    payload: orderId,
-    paid_btn_name: "callback",
-    paid_btn_url: `${origin}/order/${orderId}`,
-    expires_in: 3600,
-    allow_comments: false,
-    allow_anonymous: true,
+  const inv = await createInvoice({
+    price_amount: product.priceEur,
+    price_currency: "eur",
+    order_id: orderId,
+    order_description: `${product.name} — FSOCIETY`,
+    ipn_callback_url: `${origin}/api/shop/webhook`,
+    success_url: `${origin}/order/${orderId}`,
+    cancel_url: `${origin}/#shop`,
   });
 
-  if (!inv.ok || !inv.result) {
+  if (!inv || !inv.invoice_url) {
     return NextResponse.json(
       { error: "Could not create invoice." },
       { status: 502 },
@@ -63,17 +51,11 @@ export async function POST(req: NextRequest) {
     id: orderId,
     productId: product.id,
     productName: product.name,
-    invoiceId: inv.result.invoice_id,
+    invoiceId: inv.id,
     status: "pending" as const,
     createdAt: new Date().toISOString(),
   };
   await store.set(`order:${orderId}`, JSON.stringify(order));
-  await store.set(`invoice:${inv.result.invoice_id}`, orderId);
 
-  const payUrl =
-    inv.result.bot_invoice_url ||
-    inv.result.mini_app_invoice_url ||
-    inv.result.pay_url;
-
-  return NextResponse.json({ orderId, payUrl });
+  return NextResponse.json({ orderId, payUrl: inv.invoice_url });
 }
