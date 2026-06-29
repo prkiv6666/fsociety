@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
-import { PORTAL_CHANNELS } from "@/lib/portal";
+import { PORTAL_CHANNELS, WELCOME_MESSAGE } from "@/lib/portal";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -144,6 +144,12 @@ export async function POST(req: NextRequest) {
           parse_mode: "HTML",
         });
       } else if (text.startsWith("/start")) {
+        await tg("sendMessage", {
+          chat_id: chatId,
+          text: WELCOME_MESSAGE,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        });
         await sendChallenge(chatId);
       }
     } else if (update.channel_post?.text) {

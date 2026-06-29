@@ -15,3 +15,9 @@ export const PORTAL_CHANNELS: PortalChannel[] = [
   { title: "Vouches & Proof", url: "https://t.me/+_ixcj8eF6c83MDY8" },
   { title: "Main Channel", url: "https://t.me/+IbRvVKWmbOs3M2I0" },
 ];
+
+// Greeting sent on /start, just before the security check. HTML formatting.
+export const WELCOME_MESSAGE =
+  "👁️ <b>Welcome to FSOCIETY SERVICES</b>\n\n" +
+  "Private. Secure. Fast. — your portal to our official channels: store access, vouches & proof, and live updates.\n\n" +
+  "🔒 Complete the quick security check below to unlock your invite links.";
