@@ -11,10 +11,7 @@ export interface PortalChannel {
 }
 
 export const PORTAL_CHANNELS: PortalChannel[] = [
-  {
-    title: "FSOCIETY — Main / Store List",
-    url: "https://t.me/+NbpIJfy2ZaY5OWM0",
-  },
-  { title: "FSOCIETY — Vouches & Proof", url: "https://t.me/+_ixcj8eF6c83MDY8" },
-  { title: "FSOCIETY — Chat", url: "https://t.me/+IbRvVKWmbOs3M2I0" },
+  { title: "Store List", url: "https://t.me/+NbpIJfy2ZaY5OWM0" },
+  { title: "Vouches & Proof", url: "https://t.me/+_ixcj8eF6c83MDY8" },
+  { title: "Main Channel", url: "https://t.me/+IbRvVKWmbOs3M2I0" },
 ];
