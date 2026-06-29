@@ -10,9 +10,11 @@ export interface PortalChannel {
   url: string;
 }
 
-// TODO: replace the placeholder URLs with your real invite links.
 export const PORTAL_CHANNELS: PortalChannel[] = [
-  { title: "GU$$ SERVICE MAIN CHANNEL", url: "https://t.me/REPLACE_ME" },
-  { title: "Gu$$ Chat", url: "https://t.me/REPLACE_ME" },
-  { title: "Cashback Chat", url: "https://t.me/REPLACE_ME" },
+  {
+    title: "FSOCIETY — Main / Store List",
+    url: "https://t.me/+NbpIJfy2ZaY5OWM0",
+  },
+  { title: "FSOCIETY — Vouches & Proof", url: "https://t.me/+_ixcj8eF6c83MDY8" },
+  { title: "FSOCIETY — Chat", url: "https://t.me/+IbRvVKWmbOs3M2I0" },
 ];
