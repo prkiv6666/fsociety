@@ -10,6 +10,16 @@ export const maxDuration = 60;
 // Seconds before the posted links self-destruct.
 const LINKS_TTL_SECONDS = 60;
 
+// Build emoji from code points: the bundler mangles raw astral-plane
+// emoji in string literals into literal "\uXXXX" text, so we avoid them.
+const EMO = {
+  lock: String.fromCodePoint(0x1f510), // 🔐
+  check: String.fromCodePoint(0x2705), // ✅
+  hourglass: String.fromCodePoint(0x23f3), // ⏳
+  cross: String.fromCodePoint(0x274c), // ❌
+  antenna: String.fromCodePoint(0x1f4e1), // 📡
+};
+
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const SECRET = process.env.TELEGRAM_WEBHOOK_SECRET;
 
@@ -53,7 +63,7 @@ async function sendChallenge(chatId: number) {
   await tg("sendMessage", {
     chat_id: chatId,
     text:
-      "🔐 <b>Security Verification</b>\n\n" +
+      `${EMO.lock} <b>Security Verification</b>\n\n` +
       "Solve the math problem to get your invite link:\n\n" +
       `<b>${a} + ${b} = ?</b>`,
     parse_mode: "HTML",
@@ -69,14 +79,17 @@ async function sendChallenge(chatId: number) {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function sendChannelLinks(chatId: number) {
-  const lines: string[] = ["✅ <b>Verified! Your channel links:</b>", ""];
+  const lines: string[] = [
+    `${EMO.check} <b>Verified! Your channel links:</b>`,
+    "",
+  ];
 
   for (const ch of PORTAL_CHANNELS) {
     lines.push(`<b>${esc(ch.title)}:</b>`, ch.url, "");
   }
 
   lines.push(
-    `<i>⏳ These links disappear in ${LINKS_TTL_SECONDS} seconds. Send /start for new ones.</i>`,
+    `<i>${EMO.hourglass} These links disappear in ${LINKS_TTL_SECONDS} seconds. Send /start for new ones.</i>`,
   );
 
   const res = await tg("sendMessage", {
@@ -126,7 +139,7 @@ export async function POST(req: NextRequest) {
         await tg("sendMessage", {
           chat_id: chatId,
           text:
-            `📡 <b>${esc(c.title || "chat")}</b>\n` +
+            `${EMO.antenna} <b>${esc(c.title || "chat")}</b>\n` +
             `ID: <code>${c.id}</code>\n` +
             `Type: ${esc(c.type || "?")}`,
           parse_mode: "HTML",
@@ -168,7 +181,7 @@ export async function POST(req: NextRequest) {
       if (cq.data === "verify_ok") {
         await tg("answerCallbackQuery", {
           callback_query_id: cq.id,
-          text: "✅ Verified!",
+          text: `${EMO.check} Verified!`,
         });
         await tg("editMessageReplyMarkup", {
           chat_id: chatId,
@@ -179,7 +192,7 @@ export async function POST(req: NextRequest) {
       } else {
         await tg("answerCallbackQuery", {
           callback_query_id: cq.id,
-          text: "❌ Wrong answer — try again",
+          text: `${EMO.cross} Wrong answer — try again`,
         });
         await sendChallenge(chatId);
       }

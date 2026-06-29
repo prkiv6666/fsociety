@@ -17,7 +17,11 @@ export const PORTAL_CHANNELS: PortalChannel[] = [
 ];
 
 // Greeting sent on /start, just before the security check. HTML formatting.
+// Emoji are built via String.fromCodePoint because the bundler mangles raw
+// astral-plane emoji in string literals into literal "\uXXXX" text.
+const EYE = String.fromCodePoint(0x1f441, 0xfe0f); // 👁️
+const LOCK = String.fromCodePoint(0x1f512); // 🔒
 export const WELCOME_MESSAGE =
-  "👁️ <b>Welcome to FSOCIETY SERVICES</b>\n\n" +
+  `${EYE} <b>Welcome to FSOCIETY SERVICES</b>\n\n` +
   "Private. Secure. Fast. — your portal to our official channels: store access, vouches & proof, and live updates.\n\n" +
-  "🔒 Complete the quick security check below to unlock your invite links.";
+  `${LOCK} Complete the quick security check below to unlock your invite links.`;
