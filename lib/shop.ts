@@ -17,14 +17,14 @@ export const PRODUCTS: Product[] = [
     id: "mailbg",
     name: "Mail.bg Account",
     description: "Fresh Mail.bg email account — delivered instantly after payment.",
-    priceEur: 4.99,
+    priceEur: 0.5,
     features: ["Instant auto-delivery", "Fresh & unused", "email:password format"],
   },
   {
     id: "abvbg",
     name: "ABV.bg Account",
     description: "Fresh ABV.bg email account — delivered instantly after payment.",
-    priceEur: 4.99,
+    priceEur: 0.5,
     features: ["Instant auto-delivery", "Fresh & unused", "email:password format"],
   },
 ];
