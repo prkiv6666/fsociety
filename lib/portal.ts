@@ -1,29 +1,18 @@
 /**
  * Config for the Telegram "portal" verification bot (see app/api/telegram).
  *
- * Channel chat IDs are NOT secrets, so they live here for easy editing.
- * The bot token / webhook secret are read from environment variables.
- *
- * IMPORTANT: the bot must be an ADMIN in each channel below, with the
- * "Invite Users via Link" permission, or createChatInviteLink will fail.
- * The chatId is the numeric ID (e.g. "-1001234567890"), not the @username,
- * for private channels. Easiest way to get it: add the bot as admin, then
- * forward a channel post to @userinfobot, or check getChat.
+ * After a visitor passes the captcha, the bot posts these channel links.
+ * Just paste your real invite links below — the bot does NOT need to be
+ * an admin in the channels for this to work.
  */
 export interface PortalChannel {
   title: string;
-  chatId: string;
+  url: string;
 }
 
-// TODO: replace the placeholder chatIds with your real channel IDs.
+// TODO: replace the placeholder URLs with your real invite links.
 export const PORTAL_CHANNELS: PortalChannel[] = [
-  { title: "GU$$ SERVICE MAIN CHANNEL", chatId: "-1000000000000" },
-  { title: "Gu$$ Chat", chatId: "-1000000000001" },
-  { title: "Cashback Chat", chatId: "-1000000000002" },
+  { title: "GU$$ SERVICE MAIN CHANNEL", url: "https://t.me/REPLACE_ME" },
+  { title: "Gu$$ Chat", url: "https://t.me/REPLACE_ME" },
+  { title: "Cashback Chat", url: "https://t.me/REPLACE_ME" },
 ];
-
-/** How long (seconds) the generated invite links stay valid. */
-export const LINK_EXPIRY_SECONDS = 60;
-
-/** Allow each generated link to be used once (set to 0 to disable the cap). */
-export const LINK_MEMBER_LIMIT = 1;

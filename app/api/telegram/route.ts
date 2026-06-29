@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  PORTAL_CHANNELS,
-  LINK_EXPIRY_SECONDS,
-  LINK_MEMBER_LIMIT,
-} from "@/lib/portal";
+import { PORTAL_CHANNELS } from "@/lib/portal";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -64,28 +60,14 @@ async function sendChallenge(chatId: number) {
   });
 }
 
-async function sendInviteLinks(chatId: number) {
-  const expire = Math.floor(Date.now() / 1000) + LINK_EXPIRY_SECONDS;
-  const lines: string[] = ["🔗 <b>Your temporary invite links:</b>", ""];
+async function sendChannelLinks(chatId: number) {
+  const lines: string[] = ["✅ <b>Verified! Your channel links:</b>", ""];
 
   for (const ch of PORTAL_CHANNELS) {
-    const body: Record<string, unknown> = {
-      chat_id: ch.chatId,
-      expire_date: expire,
-    };
-    if (LINK_MEMBER_LIMIT > 0) body.member_limit = LINK_MEMBER_LIMIT;
-
-    const r = await tg("createChatInviteLink", body);
-    if (r.ok && r.result?.invite_link) {
-      lines.push(`<b>${esc(ch.title)}:</b>`, r.result.invite_link, "");
-    } else {
-      lines.push(`<b>${esc(ch.title)}:</b> unavailable`, "");
-    }
+    lines.push(`<b>${esc(ch.title)}:</b>`, ch.url, "");
   }
 
-  lines.push(
-    `<i>These links expire in ${LINK_EXPIRY_SECONDS} seconds. Send /start to get new ones.</i>`,
-  );
+  lines.push("<i>Only trust links sent by this official bot.</i>");
 
   await tg("sendMessage", {
     chat_id: chatId,
@@ -161,7 +143,7 @@ export async function POST(req: NextRequest) {
           message_id: cq.message.message_id,
           reply_markup: { inline_keyboard: [] },
         });
-        await sendInviteLinks(chatId);
+        await sendChannelLinks(chatId);
       } else {
         await tg("answerCallbackQuery", {
           callback_query_id: cq.id,
