@@ -26,6 +26,10 @@ export const VOUCHES_URL = "https://t.me/+_ixcj8eF6c83MDY8";
 // Full store list channel.
 export const STORES_URL = "https://t.me/+NbpIJfy2ZaY5OWM0";
 
+// Accounts shop — Telegram bot that handles browsing + Crypto Pay checkout.
+// TODO: replace with your real bot username from BotFather (e.g. https://t.me/fsociety_shop_bot).
+export const SHOP_BOT_URL = "https://t.me/your_shop_bot";
+
 export interface Step {
   icon: LucideIcon;
   title: string;
@@ -446,7 +450,49 @@ export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
   { label: "Stores", href: "#stores" },
+  { label: "Shop", href: "#shop" },
   { label: "Process", href: "#how-it-works" },
   { label: "Vouches", href: "#vouches" },
   { label: "Contact", href: "#contact" },
+];
+
+export interface ShopAccount {
+  id: string; // used as the bot deep-link payload: t.me/bot?start=<id>
+  name: string;
+  description: string;
+  price: string; // display string, e.g. "€25"
+  badge?: string; // optional tag, e.g. "Popular", "Limited"
+  inStock: boolean;
+  features?: string[];
+}
+
+// TODO: replace these sample listings with your real accounts.
+export const shopAccounts: ShopAccount[] = [
+  {
+    id: "sample-aged-store",
+    name: "Aged Store Account",
+    description:
+      "Established account with order history — ready for higher limits.",
+    price: "€45",
+    badge: "Popular",
+    inStock: true,
+    features: ["Aged 1y+", "Verified email", "Instant delivery"],
+  },
+  {
+    id: "sample-fresh-store",
+    name: "Fresh Store Account",
+    description: "Brand-new clean account, ready to set up however you need.",
+    price: "€20",
+    inStock: true,
+    features: ["Clean history", "Verified email", "Instant delivery"],
+  },
+  {
+    id: "sample-premium-bundle",
+    name: "Premium Bundle",
+    description: "A curated bundle of premium accounts at a discounted rate.",
+    price: "€90",
+    badge: "Limited",
+    inStock: false,
+    features: ["Multiple accounts", "Best value", "Priority support"],
+  },
 ];
