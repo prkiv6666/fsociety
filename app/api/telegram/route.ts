@@ -108,10 +108,45 @@ export async function POST(req: NextRequest) {
   if (!update) return NextResponse.json({ ok: true });
 
   try {
-    if (update.message?.text) {
-      const chatId = update.message.chat.id as number;
-      if (String(update.message.text).trim().startsWith("/start")) {
+    if (update.message) {
+      const msg = update.message;
+      const chatId = msg.chat.id as number;
+
+      // Helper: forward any channel/group post here to learn its chat ID.
+      if (msg.forward_from_chat) {
+        const c = msg.forward_from_chat;
+        await tg("sendMessage", {
+          chat_id: chatId,
+          text:
+            `📡 <b>${esc(c.title || "chat")}</b>\n` +
+            `ID: <code>${c.id}</code>\n` +
+            `Type: ${esc(c.type || "?")}`,
+          parse_mode: "HTML",
+        });
+        return NextResponse.json({ ok: true });
+      }
+
+      const text = String(msg.text || "").trim();
+      if (text.startsWith("/id")) {
+        await tg("sendMessage", {
+          chat_id: chatId,
+          text:
+            `This chat ID: <code>${chatId}</code>\n\n` +
+            "To get a channel's ID, forward any post from that channel to me.",
+          parse_mode: "HTML",
+        });
+      } else if (text.startsWith("/start")) {
         await sendChallenge(chatId);
+      }
+    } else if (update.channel_post?.text) {
+      // Allow /id directly inside a channel where the bot is admin.
+      const cp = update.channel_post;
+      if (String(cp.text).trim().startsWith("/id")) {
+        await tg("sendMessage", {
+          chat_id: cp.chat.id,
+          text: `Channel ID: <code>${cp.chat.id}</code>`,
+          parse_mode: "HTML",
+        });
       }
     } else if (update.callback_query) {
       const cq = update.callback_query;
