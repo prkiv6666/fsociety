@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { PORTAL_CHANNELS } from "@/lib/portal";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Allow the function to stay alive long enough to delete the links message.
+export const maxDuration = 60;
+
+// Seconds before the posted links self-destruct.
+const LINKS_TTL_SECONDS = 60;
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const SECRET = process.env.TELEGRAM_WEBHOOK_SECRET;
@@ -60,6 +66,8 @@ async function sendChallenge(chatId: number) {
   });
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function sendChannelLinks(chatId: number) {
   const lines: string[] = ["✅ <b>Verified! Your channel links:</b>", ""];
 
@@ -67,14 +75,32 @@ async function sendChannelLinks(chatId: number) {
     lines.push(`<b>${esc(ch.title)}:</b>`, ch.url, "");
   }
 
-  lines.push("<i>Only trust links sent by this official bot.</i>");
+  lines.push(
+    `<i>⏳ These links disappear in ${LINKS_TTL_SECONDS} seconds. Send /start for new ones.</i>`,
+  );
 
-  await tg("sendMessage", {
+  const res = await tg("sendMessage", {
     chat_id: chatId,
     text: lines.join("\n"),
     parse_mode: "HTML",
     disable_web_page_preview: true,
   });
+
+  // Self-destruct the message after the TTL. waitUntil keeps the function
+  // alive past the webhook response (capped by maxDuration), so Telegram
+  // still gets its 200 immediately. Delete a hair early to stay in budget.
+  const messageId = res?.result?.message_id;
+  if (messageId) {
+    waitUntil(
+      (async () => {
+        await sleep((LINKS_TTL_SECONDS - 2) * 1000);
+        await tg("deleteMessage", {
+          chat_id: chatId,
+          message_id: messageId,
+        });
+      })(),
+    );
+  }
 }
 
 export async function POST(req: NextRequest) {
