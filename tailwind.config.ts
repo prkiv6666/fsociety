@@ -27,9 +27,9 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"],
       },
       boxShadow: {
-        "neon-sm": "0 0 12px rgba(255,30,60,0.35)",
-        neon: "0 0 28px rgba(255,30,60,0.45)",
-        "neon-lg": "0 0 48px rgba(255,30,60,0.55)",
+        "neon-sm": "0 0 10px rgba(255,30,60,0.22)",
+        neon: "0 0 22px rgba(255,30,60,0.30)",
+        "neon-lg": "0 0 40px rgba(255,30,60,0.40)",
         "inset-line": "inset 0 1px 0 0 rgba(255,255,255,0.05)",
       },
       keyframes: {

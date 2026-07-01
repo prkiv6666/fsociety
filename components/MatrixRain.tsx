@@ -89,7 +89,7 @@ export default function MatrixRain() {
     <canvas
       ref={ref}
       aria-hidden
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.10]"
+      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
     />
   );
 }

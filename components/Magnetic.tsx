@@ -11,7 +11,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export default function Magnetic({
   children,
   className = "",
-  strength = 0.35,
+  strength = 0.25,
 }: {
   children: ReactNode;
   className?: string;

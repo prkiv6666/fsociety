@@ -17,7 +17,7 @@ import {
 export default function TiltCard({
   children,
   className = "",
-  max = 8,
+  max = 6,
 }: {
   children: ReactNode;
   className?: string;
@@ -39,7 +39,7 @@ export default function TiltCard({
 
   const sx = useTransform(mx, (v) => `${v * 100}%`);
   const sy = useTransform(my, (v) => `${v * 100}%`);
-  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${sx} ${sy}, rgba(255,30,60,0.18), transparent 70%)`;
+  const spotlight = useMotionTemplate`radial-gradient(260px circle at ${sx} ${sy}, rgba(255,30,60,0.11), transparent 72%)`;
 
   const onMove = (e: React.PointerEvent) => {
     const r = ref.current?.getBoundingClientRect();

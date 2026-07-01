@@ -67,25 +67,25 @@
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon/60;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon/50;
   }
   .btn-primary {
-    @apply bg-neon text-black shadow-neon hover:-translate-y-0.5 hover:bg-neon-bright hover:shadow-neon-lg;
+    @apply bg-neon text-black shadow-neon-sm hover:-translate-y-0.5 hover:bg-neon-bright hover:shadow-neon;
   }
   .btn-ghost {
-    @apply border border-white/15 bg-white/[0.04] text-zinc-100 backdrop-blur hover:-translate-y-0.5 hover:border-neon/60 hover:text-white hover:shadow-neon-sm;
+    @apply border border-white/[0.12] bg-white/[0.03] text-zinc-100 backdrop-blur hover:-translate-y-0.5 hover:border-neon/40 hover:text-white;
   }
 
   /* Glass / cyber card */
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl transition-all duration-300;
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 backdrop-blur-xl transition-all duration-300;
   }
   .card::before {
     content: "";
-    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/50 to-transparent opacity-0 transition-opacity duration-300;
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/35 to-transparent opacity-0 transition-opacity duration-300;
   }
   .card:hover {
-    @apply -translate-y-1 border-neon/50 shadow-neon;
+    @apply -translate-y-0.5 border-neon/25 shadow-neon-sm;
   }
   .card:hover::before {
     @apply opacity-100;
@@ -98,11 +98,11 @@
 
   /* Futuristic horizontal divider */
   .divider-x {
-    @apply relative mx-auto h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-neon/40 to-transparent;
+    @apply relative mx-auto h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-neon/25 to-transparent;
   }
   .divider-x::after {
     content: "";
-    @apply absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-neon shadow-neon;
+    @apply absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-neon/80 shadow-neon-sm;
   }
 
   /* Gothic logo frame (matches the FSOCIETY artwork) */
@@ -172,7 +172,7 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 24px rgba(255, 30, 60, 0.55);
+    text-shadow: 0 0 18px rgba(255, 30, 60, 0.35);
   }
 
   /* Periodic "glitch" — mostly idle, then a brief slice/RGB-split burst.
@@ -208,7 +208,7 @@
     }
   }
   .logo-glitch {
-    animation: logo-glitch 7s steps(1, end) infinite;
+    animation: logo-glitch 12s steps(1, end) infinite;
   }
   @media (prefers-reduced-motion: reduce) {
     .logo-glitch {

@@ -18,7 +18,7 @@ export default function Background() {
 
   // Generated after mount to avoid SSR/CSR hydration mismatch from Math.random.
   useEffect(() => {
-    const next = Array.from({ length: 26 }, () => ({
+    const next = Array.from({ length: 14 }, () => ({
       left: Math.random() * 100,
       top: Math.random() * 100,
       size: Math.random() * 2.5 + 1,
@@ -38,19 +38,19 @@ export default function Background() {
       <div className="absolute inset-0 bg-base-950" />
 
       {/* Futuristic grid */}
-      <div className="grid-bg absolute inset-0 opacity-60" />
+      <div className="grid-bg absolute inset-0 opacity-40" />
 
       {/* Matrix code rain */}
       <MatrixRain />
 
       {/* Blurred red glow circles */}
-      <div className="absolute -left-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-radial-neon blur-3xl animate-pulseGlow" />
+      <div className="absolute -left-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-radial-neon opacity-60 blur-3xl animate-pulseGlow" />
       <div
-        className="absolute -right-32 top-1/3 h-[30rem] w-[30rem] rounded-full bg-radial-neon blur-3xl animate-pulseGlow"
+        className="absolute -right-32 top-1/3 h-[30rem] w-[30rem] rounded-full bg-radial-neon opacity-60 blur-3xl animate-pulseGlow"
         style={{ animationDelay: "2s" }}
       />
       <div
-        className="absolute bottom-0 left-1/4 h-[28rem] w-[28rem] rounded-full bg-radial-neon blur-3xl animate-pulseGlow"
+        className="absolute bottom-0 left-1/4 h-[28rem] w-[28rem] rounded-full bg-radial-neon opacity-60 blur-3xl animate-pulseGlow"
         style={{ animationDelay: "4s" }}
       />
 
