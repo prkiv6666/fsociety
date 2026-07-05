@@ -71,6 +71,7 @@ export const vouchImages: string[] = [
 export type Region =
   | "Worldwide"
   | "Europe"
+  | "UK"
   | "USA"
   | "USA/Canada"
   | "Available on request";
@@ -323,6 +324,74 @@ export const stores: Store[] = [
   { name: "Victoria's Secret", region: "Worldwide" },
   { name: "Shein", region: "Worldwide" },
   { name: "Sports Direct", region: "Worldwide" },
+
+  // UK store list
+  { name: "Bowers & Wilkins", region: "UK", limit: "£2k, 10 items", timeframe: "21 days" },
+  { name: "Bose", region: "UK", limit: "£3k, 10 items", timeframe: "14–21 days" },
+  { name: "Puma", region: "UK", limit: "£2k, 20 items", timeframe: "14 days" },
+  { name: "Samsonite", region: "UK", limit: "£1k, 10 items", timeframe: "14 days" },
+  { name: "American Tourister", region: "UK", limit: "£1.5k, 8 items", timeframe: "14 days" },
+  { name: "LG", region: "UK", limit: "£3k, 3 items", timeframe: "14 days" },
+  { name: "Bang & Olufsen", region: "UK", limit: "£3k, 15 items", timeframe: "14–21 days" },
+  { name: "The North Face", region: "UK", limit: "£1k, 10 items", timeframe: "14–21 days" },
+  { name: "Ray Ban", region: "UK", limit: "£3k, 10 items", timeframe: "14 days" },
+  { name: "Valentino", region: "UK", limit: "£5k, 5 items", timeframe: "14–21 days" },
+  { name: "Anker", region: "UK", limit: "£1k, 4 items", timeframe: "14 days" },
+  { name: "Ninja", region: "UK", limit: "£5k, 20 items", timeframe: "14–21 days" },
+  { name: "Adidas", region: "UK", limit: "£3k, 10 items", timeframe: "14–21 days" },
+  { name: "Polo Ralph Lauren", region: "UK", limit: "£4k, 20 items", timeframe: "14 days" },
+  { name: "Victoria's Secret", region: "UK", limit: "£2k, 20 items", timeframe: "14 days" },
+  { name: "Tommy Hilfiger", region: "UK", limit: "£1k, 20 items", timeframe: "14–21 days" },
+  { name: "Calvin Klein", region: "UK", limit: "£1k, 20 items", timeframe: "7–21 days" },
+  { name: "Ebay", region: "UK", limit: "£1k, 3 items", timeframe: "14–21 days" },
+  { name: "Marks & Spencer", region: "UK", limit: "£4k, 15 items", timeframe: "14 days" },
+  { name: "Zara", region: "UK", limit: "£500, 20 items", timeframe: "14 days" },
+  { name: "Asos", region: "UK", limit: "£200, 10 items", timeframe: "14 days" },
+  { name: "Pandora", region: "UK", limit: "£300, 5 items", timeframe: "14 days" },
+  { name: "Carl Friedrik", region: "UK", limit: "£2k, 3 items", timeframe: "14–21 days" },
+  { name: "Giorgio Armani", region: "UK", limit: "£1.5k, 5 items", timeframe: "21 days" },
+  { name: "Loro Piana", region: "UK", limit: "£800, 2 items", timeframe: "21 days" },
+  { name: "AllSaints", region: "UK", limit: "£2.5k, 20 items", timeframe: "14 days" },
+  { name: "Burberry", region: "UK", limit: "£10k, 3 items", timeframe: "21–28 days" },
+  { name: "Givenchy", region: "UK", limit: "£5k, 3 items", timeframe: "14 days" },
+  { name: "H&M", region: "UK", limit: "£2k, 20 items", timeframe: "14 days" },
+  { name: "Hugo Boss", region: "UK", limit: "£1k, 10 items", timeframe: "14 days" },
+  { name: "Jimmy Choo", region: "UK", limit: "£10k, 3 items", timeframe: "14–28 days" },
+  { name: "Lululemon", region: "UK", limit: "£3k, 30 items", timeframe: "14 days" },
+  { name: "Montblanc", region: "UK", limit: "£5k, 5 items", timeframe: "14–21 days" },
+  { name: "Roborock", region: "UK", limit: "£3k, 7 items", timeframe: "14 days" },
+  { name: "Sephora", region: "UK", limit: "£2k, 10 items", timeframe: "14–21 days" },
+  { name: "Sunglass Hut", region: "UK", limit: "£3k, 10 items", timeframe: "21 days" },
+  { name: "UGG", region: "UK", limit: "£2k, 5 items", timeframe: "14 days" },
+  { name: "Vans", region: "UK", limit: "£3k, 10 items", timeframe: "14 days" },
+  { name: "Versace", region: "UK", limit: "£5k, 5 items", timeframe: "21–28 days" },
+  { name: "Asics", region: "UK", limit: "£500, 5 items", timeframe: "14 days" },
+  { name: "Tom Ford", region: "UK", limit: "£1.5k, 5 items", timeframe: "14 days" },
+  { name: "Lacoste", region: "UK", limit: "£1k, 5 items", timeframe: "14–21 days" },
+  { name: "Palm Angels", region: "UK", limit: "£2.5k, 20 items", timeframe: "14–21 days" },
+  { name: "Nike", region: "UK", limit: "£1k, 2 items", timeframe: "14–21 days" },
+  { name: "McLaren Store", region: "UK", limit: "£3k, 5 items", timeframe: "14 days" },
+  { name: "OnePlus", region: "UK", limit: "£2k, 1 item", timeframe: "14–21 days" },
+  { name: "Nikon", region: "UK", limit: "£3k, 3 items", timeframe: "14–21 days" },
+  {
+    name: "Back Market",
+    region: "UK",
+    limit: "£3k, 2 items (same devices)",
+    timeframe: "21 days",
+    note: "Hard store — expect multiple back-and-forth",
+  },
+  { name: "Logitech", region: "UK", limit: "£1k, 10 items", timeframe: "14–21 days" },
+  { name: "Urban Outfitters", region: "UK", limit: "£1k, 10 items", timeframe: "14–21 days" },
+  { name: "New Balance", region: "UK", limit: "£500, 2 items", timeframe: "14–21 days" },
+  {
+    name: "Arcteryx",
+    region: "UK",
+    limit: "£2k, 5 items",
+    timeframe: "21–28 days",
+    note: "Needs a solid SE and some pushing",
+  },
+  { name: "NinjaKitchen", region: "UK", limit: "£3k, 10 items", timeframe: "14 days" },
+  { name: "Steelseries", region: "UK", limit: "£3k, 10 items", timeframe: "14 days" },
 ];
 
 export interface Feature {

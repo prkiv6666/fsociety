@@ -27,6 +27,11 @@ function regionStyle(region: Region): { cls: string; Icon: typeof Globe } {
         cls: "border-neon/30 bg-neon/5 text-neon-soft",
         Icon: Globe,
       };
+    case "UK":
+      return {
+        cls: "border-neon-soft/40 bg-neon-soft/10 text-neon-soft",
+        Icon: MapPin,
+      };
     case "USA":
       return {
         cls: "border-white/15 bg-white/5 text-zinc-300",
@@ -129,13 +134,14 @@ export default function Stores() {
               { label: "Fee", value: store.fee },
             ].filter((r) => r.value);
             const hasDetails = infoRows.length > 0 || Boolean(store.note);
-            const isOpen = openStore === store.name;
+            const storeId = `${store.name}-${store.region}`;
+            const isOpen = openStore === storeId;
             return (
-              <Reveal key={store.name} delay={(i % 4) * 0.05}>
+              <Reveal key={storeId} delay={(i % 4) * 0.05}>
                 <motion.div
                   whileHover={{ y: hasDetails ? -3 : -5 }}
                   onClick={() =>
-                    hasDetails && setOpenStore(isOpen ? null : store.name)
+                    hasDetails && setOpenStore(isOpen ? null : storeId)
                   }
                   className={`card group flex h-full flex-col justify-between gap-4 p-5 ${
                     hasDetails ? "cursor-pointer" : ""
