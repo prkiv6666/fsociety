@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+// Use a dedicated contact bot if configured; fall back to the main bot.
+const TOKEN = process.env.CONTACT_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.CONTACT_TELEGRAM_CHAT_ID;
 
 function esc(s: string) {
