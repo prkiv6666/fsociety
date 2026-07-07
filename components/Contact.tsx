@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Send, ShieldAlert } from "lucide-react";
 import { Reveal } from "./Reveal";
+import ContactForm from "./ContactForm";
 import { TELEGRAM_HANDLE, TELEGRAM_URL } from "@/lib/data";
 
 export default function Contact() {
@@ -29,16 +30,22 @@ export default function Contact() {
               </h2>
 
               <p className="mt-5 max-w-xl text-base text-zinc-400 sm:text-lg">
-                Get fast, private support and direct access through the official
-                channel.
+                Send us a message below, or reach out directly through the
+                official channel.
               </p>
+
+              <ContactForm />
+
+              <div className="mt-8 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-zinc-600">
+                <span className="h-px w-8 bg-white/10" /> or <span className="h-px w-8 bg-white/10" />
+              </div>
 
               <motion.a
                 whileHover={{ y: -3 }}
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary mt-9 px-8 py-4 text-base"
+                className="btn btn-ghost mt-6 px-8 py-4 text-base"
               >
                 <Send className="h-5 w-5" />
                 DM us on Telegram
