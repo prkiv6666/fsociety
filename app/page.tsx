@@ -16,6 +16,7 @@ import BackToTop from "@/components/BackToTop";
 import StoreTicker from "@/components/StoreTicker";
 import MobileContactBar from "@/components/MobileContactBar";
 import Shop from "@/components/Shop";
+import ChatWidget from "@/components/ChatWidget";
 
 function Divider() {
   return (
@@ -55,6 +56,7 @@ export default function Home() {
       <SiteTour />
       <BackToTop />
       <MobileContactBar />
+      <ChatWidget />
     </>
   );
 }
