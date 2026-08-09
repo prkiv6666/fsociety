@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Send, ListTree, ShieldCheck } from "lucide-react";
-import { BrandLockup } from "./Logo";
 import DecryptText from "./DecryptText";
 import Magnetic from "./Magnetic";
 import { haptic } from "@/lib/haptics";
@@ -41,8 +40,25 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.div variants={item} className="mt-8">
-          <BrandLockup />
+        <motion.div variants={item} className="mt-8 w-full">
+          <a
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open FSOCIETY on Telegram"
+            className="group relative mx-auto block w-full max-w-2xl overflow-hidden rounded-2xl border border-neon/30 shadow-[0_0_40px_rgba(255,30,60,0.18)] transition-transform duration-300 hover:scale-[1.01]"
+          >
+            <video
+              className="block h-auto w-full"
+              src="/banner.mp4"
+              poster="/banner-poster.png"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            />
+          </a>
         </motion.div>
 
         <motion.h1
