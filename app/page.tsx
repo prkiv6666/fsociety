@@ -17,6 +17,7 @@ import StoreTicker from "@/components/StoreTicker";
 import MobileContactBar from "@/components/MobileContactBar";
 import Shop from "@/components/Shop";
 import ChatWidget from "@/components/ChatWidget";
+import Banner from "@/components/Banner";
 
 function Divider() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       <ScrollProgress />
       <Navbar />
       <main>
+        <Banner />
         <Hero />
         <Features />
         <StoreTicker />
